@@ -96,6 +96,7 @@ class LogEntry(models.Model):
         If self.change_message is a JSON structure, interpret it as a change
         string, properly translated.
         """
+        self.change_message = str(self.change_message) #ALEX (due to HANA problem with TextField)
         if self.change_message and self.change_message[0] == '[':
             try:
                 change_message = json.loads(self.change_message)
